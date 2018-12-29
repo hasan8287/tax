@@ -1,0 +1,33 @@
+{
+  "name": "tax-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha test ./test/index.spec --timeout 120000 --sort --exit",
+    "dev": "nodemon ./src/server"
+  },
+  "author": "hasan8287@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bookshelf": "^0.14.2",
+    "boom": "^7.3.0",
+    "dotenv": "^6.2.0",
+    "faker": "^4.1.0",
+    "hapi": "^17.8.1",
+    "joi": "^14.3.0",
+    "knex": "^0.16.3",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "mock-knex": "^0.4.3",
+    "sinon": "^7.2.2"
+  }
+}

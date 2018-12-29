@@ -1,0 +1,64 @@
+#!/bin/bash
+set -e
+
+help() {
+  echo "Cicilan API Service."
+  echo ""
+  echo "Usage:"
+  echo ""
+
+  echo "start -- start cicilan-service api server"
+  echo "schedule -- schedule for fetch magento order"
+  echo "migrate -- copy existing production data"
+  echo "seed -- generate basic data"
+}
+
+service() {
+  case "$1" in
+    seed)
+      shift
+      
+      echo "start seed ..."
+
+      #npm run seed
+
+      ;;
+    dev)
+      shift
+
+      echo "Start Development Server"
+      npm run dev
+      ;;
+    start)
+      shift
+
+      echo "Start Production Server"
+      pm2-runtime start ./src/server.js -i max --web
+      ;;
+    *)
+      help
+      ;;
+  esac
+}
+
+SERVICE_COMMAND=$(echo "$@")
+echo "SEVICE COMMAND: $SERVICE_COMMAND"
+
+# wait for mongo listen to connection
+if [[ ${NODE_ENV} == 'development' ]]; then
+  echo "oke"
+  # until nc -z mana-mongo 27017; do
+  #   echo "waiting for mongo to accept connection ..."
+  #   sleep 1
+  # done
+fi
+
+PREFIX="sh -c "
+COMMAND=$(echo "$SERVICE_COMMAND" | sed -e "s/^$PREFIX//")
+
+IFS=' ' read -r -a commands <<< "$COMMAND"
+
+for action in "${commands[@]}"
+do
+  service "$action"
+done
