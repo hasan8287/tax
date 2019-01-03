@@ -1,0 +1,16 @@
+DOCUMENTATION DESIGN DATABASE
+
+1. TABLE CATEGORY
+	for tax code
+	FIELD :
+		category_id : primary, this field is code
+		name: type tax
+		value: amount tax
+		refundable: initial refundable 
+2. TABLE TAX
+	for tax list
+	FIELD :
+		tax_id: primary
+		category_id: code tax
+		tax_name: name list tax
+		tax_price: price list tax
