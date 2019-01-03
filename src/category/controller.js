@@ -36,7 +36,7 @@ controller.getData = async (request, reply) => {
   try {
     const { query } = request;
     const { page = 1, limit = 10 } = query;
-     
+
     const data = await modelCategory.getCategoryWithPagination({
       page,
       limit,

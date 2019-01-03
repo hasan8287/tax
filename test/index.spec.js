@@ -3,7 +3,6 @@ require('dotenv').config();
 const Hapi = require('hapi');
 
 const routes = require('./../src/core/routes');
-const { knex: conn, config } = require('./../src/core/database');
 
 this.tmp = {};
 

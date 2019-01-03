@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 29 Des 2018 pada 13.21
+-- Waktu pembuatan: 03 Jan 2019 pada 18.03
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 5.6.37
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tax`
+-- Database: `test`
 --
 
 -- --------------------------------------------------------
@@ -40,9 +40,29 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name`, `value`, `refundable`) VALUES
-(1, 'asdsadsa', 4.9, 'NO'),
-(2, 'test', 1, 'YES'),
-(3, 'test 2', 1, 'YES');
+(1, 'test-02', 1, 'YES');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tax`
+--
+
+CREATE TABLE `tax` (
+  `tax_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `tax_name` varchar(200) NOT NULL,
+  `tax_price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tax`
+--
+
+INSERT INTO `tax` (`tax_id`, `category_id`, `tax_name`, `tax_price`) VALUES
+(1, 1, 'test-01', 10000),
+(2, 1, 'test-01', 10000),
+(5, 1, 'Big Mac', 60000);
 
 --
 -- Indexes for dumped tables
@@ -55,6 +75,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indeks untuk tabel `tax`
+--
+ALTER TABLE `tax`
+  ADD PRIMARY KEY (`tax_id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -62,7 +88,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT untuk tabel `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `tax`
+--
+ALTER TABLE `tax`
+  MODIFY `tax_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

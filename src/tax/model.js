@@ -13,7 +13,7 @@ class TaxModel extends database.Model {
 
   /**
    * get data tax
-   * @param {object: {page: int, limit: int}} 
+   * @param {object: {page: int, limit: int}}
    */
   getCategoryWithPagination(param) {
     return this.query((qb) => {
