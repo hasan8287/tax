@@ -2,7 +2,7 @@ const Boom = require('boom');
 
 const Model = require('./model');
 
-const modelCategory = new Model();
+const modelTax = new Model();
 
 const controller = {};
 
@@ -21,7 +21,7 @@ controller.deleteData = async (request, reply) => {
 
     return reply.response({
       data: {
-        category_id: id,
+        tax_id: id,
       },
     }).code(200);
   } catch (error) {
@@ -30,23 +30,20 @@ controller.deleteData = async (request, reply) => {
 };
 
 /**
- * getData get all data category tax
+ * getData get all data tax
  */
 controller.getData = async (request, reply) => {
   try {
     const { query } = request;
     const { page = 1, limit = 10 } = query;
-     
-    const data = await modelCategory.getCategoryWithPagination({
+
+    const data = await modelTax.getCategoryWithPagination({
       page,
       limit,
     });
-
     return reply.response({
-      data: {
-        docs: data,
-        ...data.pagination,
-      },
+      data,
+      ...data.pagination,
     }).code(200);
   } catch (error) {
     return Boom.badRequest(error.message);
@@ -55,12 +52,12 @@ controller.getData = async (request, reply) => {
 
 
 /**
- * createData create data category tax
+ * createData : create data tax
  */
 controller.createData = async (request, reply) => {
   try {
     const { payload } = request;
-    const data = await modelCategory.insertNewCategory(payload);
+    const data = await modelTax.insertNewTax(payload);
 
     return reply.response({
       data,

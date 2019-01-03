@@ -1,27 +1,34 @@
 const bookshelf = require('bookshelf');
-const mockDb = require('mock-knex');
-const knex = require('knex');
 
-// const knex = require('knex')({
-//   client: 'mysql',
-//   connection: {
-//     host: '127.0.0.1',
-//     user: 'root',
-//     password: '',
-//     database: 'tax',
-//   },
-// });
+let config = {
+  host: process.env.HOST_MYSQL,
+  port: process.env.PORT_MYSQL,
+  user: process.env.USERNAME_MYSQL,
+  password: process.env.PASSWORD_MYSQL,
+  database: process.env.DATABASE_MYSQL,
+};
 
-const dbku = knex({
+if (process.env.NODE_ENV === 'test') {
+  config = {
+    host: process.env.HOST_MYSQL_TEST,
+    port: process.env.PORT_MYSQL_TEST,
+    user: process.env.USERNAME_MYSQL_TEST,
+    password: process.env.PASSWORD_MYSQL_TEST,
+    database: process.env.DATABASE_MYSQL_TEST,
+  };
+}
+
+const knex = require('knex')({
   client: 'mysql',
+  connection: config,
 });
 
 function connect() {
-  return bookshelf(mockDb.mock(dbku));
+  return bookshelf(knex);
 }
 
 const db = connect();
 db.plugin('pagination');
 db.plugin('registry');
 
-module.exports = db;
+module.exports = { db, knex, config };

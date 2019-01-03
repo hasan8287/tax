@@ -1,3 +1,4 @@
 const routes = require('./routes');
+const CategoryModel = require('./model');
 
-module.exports = { routes };
+module.exports = { routes, CategoryModel };

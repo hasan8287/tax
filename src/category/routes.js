@@ -19,4 +19,13 @@ module.exports = [
     path: '/category',
     handler: controller.createData,
   },
+
+  /**
+   * delete category tax by id
+   */
+  {
+    method: 'DELETE',
+    path: '/category/{id}',
+    handler: controller.deleteData,
+  },
 ];

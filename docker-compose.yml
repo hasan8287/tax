@@ -1,31 +1,30 @@
-version: '2'
+version: '3'
 services:
-  tax-db:
-    image: "mysql:5.5.62"
+  db-mysql:
+    image: "mysql:5.7"
     ports:
       - 3306:3306
-    volumes:
-      - db:/var/lib/mysql
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=root
-    labels:
-      - convox.start.shift=100
-  tax-api:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=tax
+    volumes:
+      - my-datavolume:/var/lib/mysql
+  web:
     build:
       context: .
       dockerfile: Dockerfile
     command: dev
-    restart: always
-    depends_on:
-      - tax-db
-    links:
-      - tax-db
+    restart: 'always'
     ports:
-      - 80:8080
+      - 8001:8001
+    depends_on:
+      - db-mysql
+    links:
+      - db-mysql
     environment:
       - NODE_ENV=development
-    labels:
-      - convox.start.shift=100
-      - convox.balancer=true
-      - convox.health.timeout=30
-      - convox.port.443.protocol=https
+      - MYSQL_DATABASE=tax
+volumes:
+  my-datavolume:
